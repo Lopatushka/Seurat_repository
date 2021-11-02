@@ -4,6 +4,7 @@ library(patchwork)
 
 path <- "C:/Users/User/data/"
 
+
 # Load the PBMC dataset
 pbmc.data <- Read10X(data.dir = path)
 # Initialize the Seurat object with the raw (non-normalized data)
@@ -14,3 +15,7 @@ dense.size
 sparse.size <- object.size(pbmc.data)
 sparse.size
 dense.size/sparse.size
+
+# The [[ operator can add columns to object metadata. This is a great place to stash QC stats
+pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
+
